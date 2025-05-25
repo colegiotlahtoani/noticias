@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias | Colegio Tlahtoani</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --verde-limon: #CDDC39;
+            --azul-verde: #009688;
+            --naranja: #FF9800;
+            --morado: #9C27B0;
+            --amarillo: #FFEB3B;
+            --rojo: #F44336;
+            --gris-oscuro: #212121;
+            --gris-claro: #f5f5f5;
+            --degradado-hero: linear-gradient(135deg, #009688, #673AB7);
+            --degradado-card: linear-gradient(135deg, #FF5722, #FF9800);
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            color: var(--gris-oscuro);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Cabecera de noticias */
+        .news-hero {
+            background: var(--degradado-hero);
+            color: white;
+            padding: 5rem 1.5rem 4rem;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .news-hero::before {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: white;
+            transform: skewY(-3deg);
+            z-index: 1;
+        }
+        
+        .news-logo {
+            width: 80px;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+            position: relative;
+            z-index: 2;
+        }
+        
+        .news-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, white, var(--amarillo));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .news-subtitle {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Grid de noticias */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 3rem 0;
+            justify-items: center;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
+            max-width: 400px;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .news-header {
+            height: 180px;
+            background: var(--degradado-card);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .news-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .news-card:hover .news-header img {
+            transform: scale(1.05);
+        }
+        
+        .news-date {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .news-body {
+            padding: 1.5rem;
+        }
+        
+        .news-category {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: var(--morado);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+        
+        .news-card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--gris-oscuro);
+            position: relative;
+        }
+        
+        .news-card-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--azul-verde);
+            border-radius: 3px;
+        }
+        
+        .news-excerpt {
+            font-size: 0.95rem;
+            color: var(--gris-oscuro);
+            margin: 1rem 0;
+            opacity: 0.9;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: var(--morado);
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: var(--azul-verde);
+            transform: translateX(5px);
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* Animaciones */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .news-hero {
+                padding: 4rem 1rem 3rem;
+            }
+            
+            .news-title {
+                font-size: 2rem;
+            }
+            
+            .news-subtitle {
+                font-size: 1rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="news-hero">
+        <div class="container">
+            <img src="logo-colegio-tlahtoani.png" alt="Logo Colegio Tlahtoani" class="news-logo">
+            <h1 class="news-title">Noticias Educativas</h1>
+            <p class="news-subtitle">Mantente informado sobre las últimas novedades y eventos del Colegio Tlahtoani</p>
+        </div>
+    </header>
+    
+    <main>
+        <section class="container">
+            <div class="news-grid">
+                <!-- Noticia 1 - Única noticia -->
+                <article class="news-card fade-in">
+                    <div class="news-header">
+                        <span class="news-date">24 Mayo 2025</span>
+                        <img src="noticia1.jpg" alt="Estudiantes en competencia académica">
+                    </div>
+                    <div class="news-body">
+                        <span class="news-category">Eventos</span>
+                        <h3 class="news-card-title">Triunfo en el AMCO Summit 2025</h3>
+                        <p class="news-excerpt">Nuestros estudiantes destacaron en el prestigioso evento académico internacional.</p>
+                        <a href="https://colegiotlahtoani.github.io/amcosummit/" target="_blank" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Animación de aparición al hacer scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            fadeObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
