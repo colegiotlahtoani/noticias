@@ -96,7 +96,7 @@
             padding: 0 1.5rem;
         }
         
-        /* Grid de noticias */
+        /* Grid de noticias - Cambios principales aquí */
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -122,16 +122,20 @@
         }
         
         .news-header {
-            height: 180px;
+            height: auto; /* Cambiado a altura automática */
+            min-height: 180px; /* Altura mínima para mantener diseño */
             background: var(--degradado-card);
             position: relative;
-            overflow: hidden;
+            /* Quitamos overflow: hidden para evitar recortes */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .news-header img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto; /* Mantiene proporción */
+            object-fit: contain; /* Muestra toda la imagen sin recortar */
             transition: transform 0.5s ease;
         }
         
