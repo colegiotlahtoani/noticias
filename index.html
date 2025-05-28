@@ -96,6 +96,32 @@
             padding: 0 1.5rem;
         }
         
+        /* Botón de inicio */
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 0.6rem 1.2rem;
+            background-color: white;
+            color: var(--azul-verde);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background-color: var(--azul-verde);
+            color: white;
+        }
+        
         /* Grid de noticias */
         .news-grid {
             display: grid;
@@ -240,11 +266,22 @@
             .news-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .home-button {
+                top: 15px;
+                left: 15px;
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
     <header class="news-hero">
+        <!-- Botón de Inicio añadido aquí -->
+        <a href="https://colegiotlahtoani.com/" class="home-button">
+            <i class="fas fa-home"></i> Inicio
+        </a>
         <div class="container">
             <img src="logo-colegio-tlahtoani.png" alt="Logo Colegio Tlahtoani" class="news-logo">
             <h1 class="news-title">Noticias Educativas</h1>
@@ -255,7 +292,7 @@
     <main>
         <section class="container">
             <div class="news-grid">
-                <!-- Noticia del menú escolar (ahora primera) -->
+                <!-- Noticia del menú escolar (primera) -->
                 <article class="news-card fade-in">
                     <div class="news-header">
                         <img src="menu-escolar.jpg" alt="Menú escolar semanal">
@@ -268,7 +305,7 @@
                     </div>
                 </article>
 
-                <!-- Noticia original (ahora segunda) -->
+                <!-- Noticia original (segunda) -->
                 <article class="news-card fade-in">
                     <div class="news-header">
                         <img src="noticia1.jpg" alt="Estudiantes en competencia académica">
