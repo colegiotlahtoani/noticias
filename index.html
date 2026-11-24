@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Noticias | Colegio Tlahtoani</title>
-    <meta name="description" content="Noticias, avisos, eventos y menú escolar del Colegio Tlahtoani GDL.">
+    <title>Avisos | Colegio Tlahtoani</title>
+    <meta name="description" content="Avisos, eventos y menú escolar del Colegio Tlahtoani GDL.">
     <script>document.documentElement.classList.add('js');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -339,14 +339,44 @@
             .brand img { width: 52px; height: 52px; }
             .news-grid { grid-template-columns: 1fr; }
         }
+
+        /* ---------- Información importante: boletos extra ---------- */
+        .importante { padding: 3.2rem 0 0; }
+        .imp-caja {
+            position: relative; overflow: hidden; display: grid; grid-template-columns: auto 1fr auto; gap: 1.8rem; align-items: center;
+            background: linear-gradient(135deg, #F6C945, #FFE08A); border: 3px solid #E8B923; border-radius: 28px;
+            padding: 1.9rem 2.3rem; box-shadow: 0 18px 44px rgba(232, 185, 35, 0.38);
+        }
+        .imp-caja::before { content: ""; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: rgba(255, 255, 255, 0.35); right: -70px; top: -120px; pointer-events: none; }
+        .imp-caja > * { position: relative; }
+        .imp-ico { width: 92px; height: 92px; border-radius: 50%; background: var(--morado-oscuro); color: var(--sol); display: flex; align-items: center; justify-content: center; font-size: 2.6rem; animation: pulso 2.2s ease-out infinite; }
+        @keyframes pulso { 0% { box-shadow: 0 0 0 0 rgba(46, 26, 94, 0.5); } 70% { box-shadow: 0 0 0 20px rgba(46, 26, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(46, 26, 94, 0); } }
+        .imp-tag { display: inline-flex; align-items: center; gap: 0.45rem; background: var(--morado-oscuro); color: var(--sol); font-weight: 800; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 0.6rem; }
+        .imp-caja h2 { font-size: clamp(1.6rem, 3.6vw, 2.4rem); margin-bottom: 0.35rem; }
+        .imp-caja p { color: #3B2F63; font-weight: 700; font-size: 1.05rem; }
+        .imp-precio { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
+        .imp-monto { font-family: 'Nunito', Arial, sans-serif; font-weight: 800; font-size: 4rem; line-height: 1; color: var(--morado-oscuro); }
+        .imp-monto small { display: block; font-size: 1.05rem; letter-spacing: 0.1em; text-transform: uppercase; color: #3B2F63; margin-top: 0.15rem; }
+
+        .news-card.destacada { border-color: #E8B923; box-shadow: 0 0 0 4px rgba(246, 201, 69, 0.4), var(--sombra); position: relative; }
+        .cinta-imp { position: absolute; top: 14px; left: 14px; z-index: 2; background: var(--morado-oscuro); color: var(--sol); font-family: 'Nunito', Arial, sans-serif; font-weight: 800; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 0.9rem; border-radius: 999px; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25); }
+        .aviso-boleto { display: flex; align-items: center; gap: 0.8rem; background: #FFF4CC; border: 2px dashed #E8B923; border-radius: 14px; padding: 0.75rem 0.95rem; color: var(--morado-oscuro); font-weight: 700; font-size: 0.97rem; line-height: 1.35; }
+        .aviso-boleto i { color: var(--morado); font-size: 1.5rem; flex-shrink: 0; }
+        .aviso-boleto b.precio { font-family: 'Nunito', Arial, sans-serif; font-size: 1.15rem; }
+
+        @media (max-width: 820px) {
+            .imp-caja { grid-template-columns: 1fr; text-align: center; justify-items: center; padding: 1.8rem 1.4rem; }
+            .imp-monto { font-size: 3.4rem; }
+        }
+        @media (prefers-reduced-motion: reduce) { .imp-ico { animation: none; } }
     </style>
 </head>
 <body>
 
     <!-- Barra de aviso -->
     <div class="topbar">
-        <i class="fas fa-spell-check"></i>¡Ya viene el Spelling Bee! Martes 8 de diciembre.
-        <a href="#spelling-bee">Prepárate aquí</a>
+        <i class="fas fa-ticket"></i>¡Ya están a la venta los boletos extra del festival! $100.
+        <a href="#boletos">Ver aviso</a>
     </div>
 
     <!-- Encabezado y menú -->
@@ -354,7 +384,7 @@
         <div class="container">
             <a href="https://colegiotlahtoani.com/" class="brand" aria-label="Colegio Tlahtoani, ir al sitio principal">
                 <img src="logo-tlahtoani.png" alt="Logo Colegio Tlahtoani">
-                <span>Colegio Tlahtoani<small>NOTICIAS Y AVISOS</small></span>
+                <span>Colegio Tlahtoani<small>AVISOS</small></span>
             </a>
 
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
@@ -362,7 +392,7 @@
             </button>
 
             <nav class="nav" id="menu" aria-label="Menú principal">
-                <a class="link" href="#noticias" data-filtro="todas">Noticias</a>
+                <a class="link" href="#noticias" data-filtro="todas">Avisos</a>
                 <a class="link" href="#noticias" data-filtro="Eventos">Eventos</a>
                 <a class="link" href="#noticias" data-filtro="Servicios">Menús</a>
                 <a class="link" href="#spelling-bee">Spelling Bee</a>
@@ -377,11 +407,11 @@
         <section class="hero" id="inicio">
             <div class="container">
                 <div>
-                    <span class="etiqueta">Noticias educativas</span>
+                    <span class="etiqueta">Plataforma de avisos</span>
                     <h1>Todo lo que pasa en el <em>Colegio Tlahtoani</em>, en un solo lugar</h1>
                     <p class="lead">Avisos importantes, eventos, menú escolar y logros de nuestros alumnos, siempre actualizados y al alcance de tu celular.</p>
                     <div class="hero-botones">
-                        <a class="btn btn-primario" href="#noticias" data-filtro="todas">Ver noticias <i class="fas fa-arrow-down"></i></a>
+                        <a class="btn btn-primario" href="#noticias" data-filtro="todas">Ver avisos <i class="fas fa-arrow-down"></i></a>
                         <a class="btn btn-borde" href="https://colegiotlahtoani.com/"><i class="fas fa-home"></i> Ir al sitio del colegio</a>
                     </div>
                 </div>
@@ -433,6 +463,24 @@
             </div>
         </section>
 
+        <!-- Aviso del festival: boletos extra -->
+        <section class="importante" id="boletos">
+            <div class="container">
+                <div class="imp-caja reveal" role="note" aria-label="Aviso del festival: boletos extra">
+                    <span class="imp-ico" aria-hidden="true"><i class="fas fa-ticket"></i></span>
+                    <div>
+                        <span class="imp-tag"><i class="fas fa-ticket"></i> Aviso del festival</span>
+                        <h2>¡Ya están a la venta los boletos extra!</h2>
+                        <p>Festival Navideño Tlahtoani 2026. Consulta la información del evento.</p>
+                    </div>
+                    <div class="imp-precio">
+                        <div class="imp-monto">$100<small>pesos</small></div>
+                        <a class="btn btn-morado" href="https://colegiotlahtoani.github.io/festival-navideno-tlahtoani-2026/" target="_blank" rel="noopener">Ver información <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Spelling Bee -->
         <section class="bee" id="spelling-bee">
             <div class="container">
@@ -461,11 +509,11 @@
             <div class="container">
                 <div class="seccion-cabeza reveal">
                     <span class="sobre">Últimas novedades</span>
-                    <h2>Noticias del colegio</h2>
+                    <h2>Avisos del colegio</h2>
                     <p>Mantente informado sobre las novedades y eventos del Colegio Tlahtoani.</p>
                 </div>
 
-                <div class="filtros reveal" role="group" aria-label="Filtrar noticias">
+                <div class="filtros reveal" role="group" aria-label="Filtrar avisos">
                     <button class="filtro activo" data-filtro="todas">Todas</button>
                     <button class="filtro" data-filtro="Urgente">Avisos</button>
                     <button class="filtro" data-filtro="Eventos">Eventos</button>
@@ -485,12 +533,14 @@
                     </article>
 
                     <!-- Noticia: Festival Navideño 2026 -->
-                    <article class="news-card reveal" data-cat="Eventos">
+                    <article class="news-card destacada reveal" data-cat="Eventos">
+                        <span class="cinta-imp"><i class="fas fa-ticket"></i> Boletos extra</span>
                         <div class="news-header icono rojo"><i class="fas fa-tree"></i></div>
                         <div class="news-body">
                             <span class="news-category">Eventos</span>
                             <h3 class="news-card-title">🎄 Festival Navideño Tlahtoani 2026</h3>
-                            <p class="news-excerpt">Consulta toda la información del festival navideño del colegio. <strong>Ya están a la venta los boletos extra: $100.</strong></p>
+                            <p class="news-excerpt">Consulta toda la información del festival navideño del colegio.</p>
+                            <div class="aviso-boleto"><i class="fas fa-ticket"></i><span>¡Ya están a la venta los boletos extra! <b class="precio">$100</b> pesos</span></div>
                             <a href="https://colegiotlahtoani.github.io/festival-navideno-tlahtoani-2026/" target="_blank" rel="noopener" class="read-more">Ver información <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </article>
@@ -519,7 +569,7 @@
                         </div>
                     </article>
                 </div>
-                <p class="vacio" id="vacio" hidden>No hay noticias en esta categoría por ahora.</p>
+                <p class="vacio" id="vacio" hidden>No hay avisos en esta categoría por ahora.</p>
             </div>
         </section>
 
@@ -562,13 +612,13 @@
                         <span class="logo-bg"><img src="logo-tlahtoani.png" alt="Logo Colegio Tlahtoani"></span>
                         <span>Colegio Tlahtoani<small>GUADALAJARA, JALISCO</small></span>
                     </a>
-                    <p class="desc">Noticias, avisos y eventos para toda la comunidad escolar.</p>
+                    <p class="desc">Avisos, eventos y menús para toda la comunidad escolar.</p>
                 </div>
                 <div>
                     <h4>Explorar</h4>
                     <ul>
                         <li><a href="https://colegiotlahtoani.com/">Sitio del colegio</a></li>
-                        <li><a href="#noticias">Noticias</a></li>
+                        <li><a href="#noticias">Avisos</a></li>
                         <li><a href="https://colegiotlahtoani.github.io/men-/" target="_blank" rel="noopener">Menú de primaria</a></li>
                         <li><a href="https://colegiotlahtoani.github.io/MEN-KINDER/" target="_blank" rel="noopener">Menú de kínder</a></li>
                     </ul>
