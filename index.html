@@ -2,370 +2,647 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Noticias | Colegio Tlahtoani</title>
+    <meta name="description" content="Noticias, avisos, eventos y menú escolar del Colegio Tlahtoani GDL.">
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --verde-limon: #CDDC39;
-            --azul-verde: #009688;
-            --naranja: #FF9800;
-            --morado: #9C27B0;
-            --amarillo: #FFEB3B;
-            --rojo: #F44336;
-            --gris-oscuro: #212121;
-            --gris-claro: #f5f5f5;
-            --degradado-hero: linear-gradient(135deg, #009688, #673AB7);
-            --degradado-card: linear-gradient(135deg, #FF5722, #FF9800);
+            --morado: #4B2A8C;
+            --morado-oscuro: #2E1A5E;
+            --verde: #7CB342;
+            --verde-oscuro: #3E6B16;
+            --verde-claro: #E4F0CF;
+            --sol: #F6C945;
+            --rojo: #D93A3A;
+            --crema: #FBF8F1;
+            --texto: #2B2350;
+            --texto-suave: #5B5478;
+            --borde: #E4DEF2;
+            --radio: 20px;
+            --sombra: 0 10px 30px rgba(46, 26, 94, 0.10);
         }
-        
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: white;
-            color: var(--gris-oscuro);
-            overflow-x: hidden;
+            font-family: 'Nunito Sans', Arial, sans-serif;
+            background: var(--crema);
+            color: var(--texto);
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        
-        /* Cabecera de noticias */
-        .news-hero {
-            background: var(--degradado-hero);
-            color: white;
-            padding: 5rem 1.5rem 4rem;
-            position: relative;
+
+        h1, h2, h3 { font-family: 'Nunito', Arial, sans-serif; font-weight: 800; color: var(--morado-oscuro); line-height: 1.15; }
+        a { color: inherit; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 max(1.5rem, env(safe-area-inset-left)) 0 max(1.5rem, env(safe-area-inset-right)); }
+        :focus-visible { outline: 3px solid var(--sol); outline-offset: 3px; }
+
+        /* ---------- Barra de aviso ---------- */
+        .topbar {
+            background: var(--morado-oscuro);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
             text-align: center;
-            overflow: hidden;
+            padding: 0.5rem 1rem;
         }
-        
-        .news-hero::before {
-            content: "";
-            position: absolute;
-            bottom: -50px;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: white;
-            transform: skewY(-3deg);
-            z-index: 1;
+        .topbar i { color: var(--sol); margin-right: 0.4rem; }
+        .topbar a { color: var(--sol); text-decoration: underline; margin-left: 0.4rem; }
+
+        /* ---------- Encabezado ---------- */
+        .header {
+            position: sticky; top: 0; z-index: 50;
+            background: #fff;
+            box-shadow: 0 2px 14px rgba(46, 26, 94, 0.08);
         }
-        
-        .news-logo {
-            width: 80px;
-            margin-bottom: 1rem;
-            animation: pulse 2s infinite;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-            position: relative;
-            z-index: 2;
+        .header .container { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 76px; }
+        .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .brand img { width: 64px; height: 64px; object-fit: contain; }
+        .brand span { font-family: 'Nunito', Arial, sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--morado-oscuro); line-height: 1.1; }
+        .brand small { display: block; font-family: 'Nunito Sans', Arial, sans-serif; font-weight: 600; font-size: 0.75rem; color: var(--texto-suave); letter-spacing: 0.04em; }
+
+        .nav { display: flex; align-items: center; gap: 0.25rem; }
+        .nav a.link {
+            text-decoration: none; font-weight: 700; font-size: 0.98rem; color: var(--texto);
+            padding: 0.55rem 0.9rem; border-radius: 999px; transition: background 0.2s, color 0.2s;
         }
-        
-        .news-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, white, var(--amarillo));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .nav a.link:hover { background: var(--verde-claro); color: var(--verde-oscuro); }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: 'Nunito', Arial, sans-serif; font-weight: 800; font-size: 1rem;
+            text-decoration: none; cursor: pointer; border: 0;
+            min-height: 44px; padding: 0.8rem 1.5rem; border-radius: 999px;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
         }
-        
-        .news-subtitle {
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto 1.5rem;
-            opacity: 0.95;
-            position: relative;
-            z-index: 2;
-            font-weight: 500;
+        .btn:hover { transform: translateY(-2px); }
+        .btn-primario { background: var(--verde); color: #1B2B0B; box-shadow: 0 6px 16px rgba(124, 179, 66, 0.35); }
+        .btn-primario:hover { background: #8CC152; }
+        .btn-morado { background: var(--morado); color: #fff; }
+        .btn-morado:hover { background: var(--morado-oscuro); }
+        .btn-borde { background: transparent; color: #fff; border: 2px solid rgba(255, 255, 255, 0.7); }
+        .btn-borde:hover { background: rgba(255, 255, 255, 0.12); }
+        .nav .btn { margin-left: 0.5rem; padding: 0.65rem 1.3rem; }
+
+        .menu-toggle { display: none; background: var(--verde-claro); border: 0; color: var(--morado-oscuro); width: 46px; height: 46px; border-radius: 12px; font-size: 1.3rem; cursor: pointer; }
+
+        /* ---------- Portada ---------- */
+        .hero {
+            background: linear-gradient(135deg, var(--morado-oscuro) 0%, var(--morado) 100%);
+            color: #fff; position: relative; overflow: hidden;
+            padding: 4.5rem 0 7rem;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+        .hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+        .hero::before { width: 420px; height: 420px; right: -120px; top: -140px; background: rgba(246, 201, 69, 0.14); }
+        .hero::after { width: 260px; height: 260px; left: -90px; bottom: 40px; background: rgba(124, 179, 66, 0.18); }
+        .hero .container { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center; }
+        .etiqueta {
+            display: inline-block; background: rgba(255, 255, 255, 0.14); color: var(--sol);
+            font-weight: 800; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;
+            padding: 0.45rem 1rem; border-radius: 999px; margin-bottom: 1.2rem;
         }
-        
-        /* Botón de inicio */
-        .home-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            padding: 0.6rem 1.2rem;
-            background-color: white;
-            color: var(--azul-verde);
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        .hero h1 { color: #fff; font-size: clamp(2.2rem, 5vw, 3.6rem); margin-bottom: 1.2rem; }
+        .hero h1 em { font-style: normal; color: var(--sol); }
+        .hero p.lead { font-size: 1.2rem; max-width: 560px; color: #E6E0F5; margin-bottom: 2rem; }
+        .hero-botones { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+        .hero-card {
+            background: #fff; border-radius: 28px; padding: 0.75rem; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+            transform: rotate(2deg); position: relative; max-width: 380px; margin-left: auto;
         }
-        
-        .home-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-            background-color: var(--azul-verde);
-            color: white;
+        .hero-card img { border-radius: 20px; width: 100%; max-height: 460px; object-fit: cover; object-position: top; }
+        .hero-card .nuevo { position: absolute; top: -14px; left: -14px; background: var(--rojo); color: #fff; font-family: 'Nunito', Arial, sans-serif; font-weight: 800; padding: 0.4rem 1rem; border-radius: 999px; transform: rotate(-4deg); box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25); }
+        .ola { position: absolute; left: 0; right: 0; bottom: -1px; line-height: 0; z-index: 1; }
+        .ola svg { width: 100%; height: 90px; display: block; }
+
+        .hero-card img.foto { height: 440px; object-position: center; }
+        .hero-card .pill { position: absolute; left: 50%; bottom: -20px; transform: translateX(-50%); white-space: nowrap; background: var(--sol); color: var(--morado-oscuro); font-family: 'Nunito', Arial, sans-serif; font-weight: 800; font-size: 0.95rem; text-decoration: none; padding: 0.6rem 1.3rem; border-radius: 999px; box-shadow: 0 8px 18px rgba(0,0,0,0.25); }
+        .hero-cards { display: flex; gap: 1.2rem; align-items: center; justify-content: flex-end; }
+        .hero-cards .hero-card { flex: 1; max-width: 250px; margin: 0; }
+        .hero-cards .hero-card img { width: 100%; height: auto; max-height: none; object-fit: cover; object-position: center; }
+        .hero-card.comunidad { transform: rotate(-3deg); }
+        .hero-card.comunidad img { aspect-ratio: 7 / 8; }
+        .hero-card.spelling { transform: rotate(3deg); }
+        .hero-card.spelling img { aspect-ratio: 2 / 3; object-position: center 40%; }
+        .hero-card.spelling .pill { width: 88%; white-space: normal; text-align: center; line-height: 1.25; font-size: 0.85rem; padding: 0.55rem 0.8rem; }
+        .evento-inner { background: linear-gradient(135deg, #F6C945, #FFE08A); border-radius: 20px; padding: 2.8rem 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+        .evento-inner i { font-size: 4.2rem; color: var(--morado-oscuro); }
+        .evento-inner h3 { font-size: 2.2rem; }
+        .evento-inner p { font-family: 'Nunito', Arial, sans-serif; font-weight: 800; font-size: 1.25rem; color: #3B2F63; margin-bottom: 0.6rem; }
+
+        /* ---------- Accesos rápidos ---------- */
+        .accesos { margin-top: -3.5rem; position: relative; z-index: 5; }
+        .accesos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+        .acceso {
+            background: #fff; border: 2px solid var(--borde); border-radius: var(--radio); padding: 1.6rem 1.4rem;
+            text-decoration: none; box-shadow: var(--sombra); transition: transform 0.25s, border-color 0.25s;
+            display: flex; flex-direction: column; gap: 0.6rem;
         }
-        
-        /* Grid de noticias */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 3rem 0;
-            justify-items: center;
+        .acceso:hover { transform: translateY(-6px); border-color: var(--verde); }
+        .acceso .ico { width: 58px; height: 58px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #fff; background: var(--morado); }
+        .acceso:nth-child(2) .ico { background: var(--verde); }
+        .acceso:nth-child(3) .ico { background: var(--sol); color: var(--morado-oscuro); }
+        .acceso:nth-child(4) .ico { background: var(--rojo); }
+        .acceso h3 { font-size: 1.25rem; }
+        .acceso p { font-size: 0.95rem; color: var(--texto-suave); }
+        .acceso .mas { margin-top: auto; font-weight: 800; color: var(--morado); font-size: 0.95rem; }
+        .acceso .mas i { margin-left: 0.3rem; transition: transform 0.2s; }
+        .acceso:hover .mas i { transform: translateX(4px); }
+
+        /* ---------- Noticias ---------- */
+        .seccion { padding: 5rem 0; }
+        .seccion-cabeza { text-align: center; max-width: 680px; margin: 0 auto 2rem; }
+        .seccion-cabeza .sobre { display: inline-block; color: var(--verde-oscuro); background: var(--verde-claro); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 999px; margin-bottom: 0.9rem; }
+        .seccion-cabeza h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 0.7rem; }
+        .seccion-cabeza p { color: var(--texto-suave); font-size: 1.1rem; }
+
+        .filtros { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-bottom: 2.5rem; }
+        .filtro {
+            font-family: 'Nunito', Arial, sans-serif; font-weight: 800; font-size: 0.95rem; cursor: pointer;
+            background: #fff; color: var(--texto); border: 2px solid var(--borde); border-radius: 999px; padding: 0.5rem 1.2rem; min-height: 44px;
+            transition: all 0.2s;
         }
-        
+        .filtro:hover { border-color: var(--verde); }
+        .filtro.activo { background: var(--morado); border-color: var(--morado); color: #fff; }
+
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.8rem; align-items: start; }
         .news-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            border: 1px solid rgba(0,0,0,0.05);
-            max-width: 400px;
+            background: #fff; border: 2px solid var(--borde); border-radius: var(--radio); overflow: hidden;
+            box-shadow: var(--sombra); transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            display: flex; flex-direction: column;
         }
-        
-        .news-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        .news-card:hover { transform: translateY(-6px); border-color: var(--verde); box-shadow: 0 16px 40px rgba(46, 26, 94, 0.16); }
+        .news-card[hidden] { display: none; }
+        .news-header { background: linear-gradient(135deg, var(--verde-claro), #F3EEFB); overflow: hidden; }
+        .news-header img { width: 100%; height: auto; transition: transform 0.5s; }
+        .news-card:hover .news-header img { transform: scale(1.04); }
+        .news-body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; gap: 0.7rem; }
+        .news-category { align-self: flex-start; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--morado); padding: 0.3rem 0.85rem; border-radius: 999px; }
+        .news-category.urgente { background: var(--rojo); }
+        .news-category.servicios { background: var(--verde-oscuro); }
+        .news-category.logros { background: #B8860B; }
+        .news-card-title { font-size: 1.3rem; }
+        .news-excerpt { font-size: 0.97rem; color: var(--texto-suave); }
+        .read-more { font-family: 'Nunito', Arial, sans-serif; font-weight: 800; text-decoration: none; color: var(--morado); margin-top: 0.3rem; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .read-more.rojo { color: var(--rojo); }
+        .read-more i { transition: transform 0.2s; }
+        .read-more:hover { color: var(--verde-oscuro); }
+        .read-more:hover i { transform: translateX(4px); }
+        .vacio { text-align: center; color: var(--texto-suave); padding: 2rem 0; }
+
+        /* ---------- Spelling Bee ---------- */
+        .bee { padding: 4rem 0 0; }
+        .bee-caja {
+            display: grid; grid-template-columns: 1.5fr 0.9fr; gap: 2rem; align-items: center;
+            background: linear-gradient(135deg, #F6C945, #FFE08A); border: 2px solid #E8B923;
+            border-radius: 32px; padding: 2.8rem;
         }
-        
-        .news-header {
-            height: auto;
-            min-height: 180px;
-            background: var(--degradado-card);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .bee-caja .etiqueta { background: var(--morado-oscuro); color: var(--sol); }
+        .bee h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-bottom: 0.6rem; }
+        .bee p.bee-fecha { font-family: 'Nunito', Arial, sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--morado-oscuro); margin-bottom: 0.8rem; }
+        .bee p.bee-fecha i { margin-right: 0.5rem; }
+        .bee p { color: #3B2F63; font-size: 1.1rem; }
+        .bee-tips { list-style: none; margin-top: 1.2rem; display: grid; gap: 0.55rem; }
+        .bee-tips li { font-weight: 700; color: var(--texto); display: flex; align-items: center; gap: 0.7rem; }
+        .bee-tips li i { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--morado-oscuro); color: var(--sol); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+        .bee-cuenta {
+            justify-self: center; width: min(240px, 100%); aspect-ratio: 1; height: auto; border-radius: 50%;
+            background: var(--morado-oscuro); color: #fff; padding: 1rem;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            box-shadow: 0 16px 40px rgba(46, 26, 94, 0.35);
         }
-        
-        .news-header img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            transition: transform 0.5s ease;
+        .bee-num { font-family: 'Nunito', Arial, sans-serif; font-weight: 800; font-size: 5rem; line-height: 1; color: var(--sol); }
+        .bee-label { font-weight: 700; font-size: 1rem; max-width: 150px; }
+
+        /* Encabezado con icono (noticias sin imagen) */
+        .news-header.icono { display: flex; align-items: center; justify-content: center; min-height: 170px; color: #fff; font-size: 4rem; background: linear-gradient(135deg, var(--morado), var(--morado-oscuro)); }
+        .news-header.icono.verde { background: linear-gradient(135deg, var(--verde), var(--verde-oscuro)); }
+        .news-header.icono.rojo { background: linear-gradient(135deg, #E25555, #A82525); }
+        .news-header.icono.sol { background: linear-gradient(135deg, #F6C945, #E8B923); color: var(--morado-oscuro); }
+
+        /* ---------- Banda de beneficios ---------- */
+        .banda { background: #fff; border-top: 2px solid var(--borde); border-bottom: 2px solid var(--borde); }
+        .banda-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .beneficio { display: flex; gap: 1.1rem; align-items: flex-start; }
+        .beneficio .ico { flex-shrink: 0; width: 60px; height: 60px; border-radius: 50%; background: var(--verde-claro); color: var(--verde-oscuro); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .beneficio h3 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+        .beneficio p { color: var(--texto-suave); font-size: 0.97rem; }
+
+        /* ---------- Llamado a la acción ---------- */
+        .cta { padding: 4.5rem 0; }
+        .cta-caja {
+            background: linear-gradient(135deg, var(--morado-oscuro), var(--morado));
+            border-radius: 32px; padding: 3.2rem 2.5rem; text-align: center; color: #fff; position: relative; overflow: hidden;
         }
-        
-        .news-card:hover .news-header img {
-            transform: scale(1.05);
+        .cta-caja::after { content: ""; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: rgba(124, 179, 66, 0.25); right: -70px; bottom: -110px; }
+        .cta-caja h2 { color: #fff; font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 0.8rem; position: relative; z-index: 1; }
+        .cta-caja p { color: #E6E0F5; max-width: 560px; margin: 0 auto 1.8rem; font-size: 1.1rem; position: relative; z-index: 1; }
+        .cta-caja .btn { position: relative; z-index: 1; }
+
+        /* ---------- Pie ---------- */
+        .footer { background: var(--morado-oscuro); color: #D8D0F0; padding: 3.5rem 0 1.5rem; }
+        .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+        .footer .brand span { color: #fff; }
+        .footer .brand small { color: #B9AFD6; }
+        .footer .brand .logo-bg { background: #fff; border-radius: 50%; padding: 6px; width: 68px; height: 68px; display: flex; align-items: center; justify-content: center; }
+        .footer .brand .logo-bg img { width: 100%; height: 100%; }
+        .footer p.desc { margin-top: 1rem; font-size: 0.97rem; max-width: 340px; }
+        .footer h4 { font-family: 'Nunito', Arial, sans-serif; color: var(--sol); font-size: 1.05rem; margin-bottom: 1rem; letter-spacing: 0.04em; }
+        .footer ul { list-style: none; display: grid; gap: 0.6rem; }
+        .footer ul a { text-decoration: none; font-size: 0.97rem; }
+        .footer ul a:hover { color: var(--sol); }
+        .footer-bajo { border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 1.3rem; font-size: 0.88rem; text-align: center; color: #B9AFD6; }
+
+        /* ---------- Animación ---------- */
+        .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .js .reveal.visible { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .js .reveal { opacity: 1; transform: none; transition: none; }
+            .btn, .acceso, .news-card, .news-header img { transition: none; }
         }
-        
-        .news-body {
-            padding: 1.5rem;
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+            .hero .container { grid-template-columns: 1fr; }
+            .hero-card { margin: 1rem auto 0; transform: none; max-width: 320px; }
+            .hero-cards { justify-content: center; margin-top: 1rem; }
+            .accesos-grid { grid-template-columns: repeat(2, 1fr); }
+            .banda-grid { grid-template-columns: 1fr; }
+            .bee-caja { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid > :first-child { grid-column: 1 / -1; }
         }
-        
-        .news-category {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            background-color: var(--morado);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            text-transform: uppercase;
-        }
-        
-        .news-card-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-            color: var(--gris-oscuro);
-            position: relative;
-        }
-        
-        .news-card-title::after {
-            content: "";
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--azul-verde);
-            border-radius: 3px;
-        }
-        
-        .news-excerpt {
-            font-size: 0.95rem;
-            color: var(--gris-oscuro);
-            margin: 1rem 0;
-            opacity: 0.9;
-        }
-        
-        .read-more {
-            display: inline-block;
-            color: var(--morado);
-            font-weight: 600;
-            text-decoration: none;
-            margin-top: 0.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .read-more:hover {
-            color: var(--azul-verde);
-            transform: translateX(5px);
-        }
-        
-        .read-more i {
-            margin-left: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .read-more:hover i {
-            transform: translateX(3px);
-        }
-        
-        /* Animaciones */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease forwards;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .news-hero {
-                padding: 4rem 1rem 3rem;
+        @media (max-width: 820px) {
+            .menu-toggle { display: block; }
+            .nav {
+                position: absolute; top: 100%; left: 0; right: 0; background: #fff;
+                flex-direction: column; align-items: stretch; gap: 0.25rem; padding: 1rem 1.5rem 1.4rem;
+                box-shadow: 0 14px 24px rgba(46, 26, 94, 0.12); display: none;
             }
-            
-            .news-title {
-                font-size: 2rem;
-            }
-            
-            .news-subtitle {
-                font-size: 1rem;
-            }
-            
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .home-button {
-                top: 15px;
-                left: 15px;
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
+            .nav.abierto { display: flex; }
+            .nav a.link { padding: 0.8rem 1rem; }
+            .nav .btn { margin: 0.5rem 0 0; justify-content: center; }
+        }
+        @media (max-width: 560px) {
+            .accesos-grid { grid-template-columns: 1fr; }
+            .hero { padding: 3rem 0 6rem; }
+            .bee-caja { padding: 1.8rem 1.4rem; }
+            .seccion { padding: 3.5rem 0; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .brand span { font-size: 1rem; }
+        }
+
+        /* ---------- Pantallas grandes ---------- */
+        @media (min-width: 1600px) {
+            .container { max-width: 1360px; }
+            html { font-size: 17px; }
+        }
+
+        /* ---------- Tabletas ---------- */
+        @media (max-width: 960px) and (min-width: 561px) {
+            .hero-cards .hero-card { max-width: 280px; }
+        }
+
+        /* ---------- Celulares ---------- */
+        @media (max-width: 820px) {
+            .nav { max-height: calc(100vh - 140px); overflow-y: auto; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p.lead { font-size: 1.05rem; }
+            .hero-botones .btn { width: 100%; justify-content: center; }
+            .hero-cards { gap: 0.8rem; }
+            .hero-card { padding: 0.5rem; border-radius: 22px; }
+            .hero-card img, .hero-card img.foto { border-radius: 16px; }
+            .hero-card .nuevo { font-size: 0.72rem; padding: 0.3rem 0.7rem; left: -6px; top: -12px; white-space: nowrap; }
+            .hero-card.spelling .pill { font-size: 0.72rem; padding: 0.45rem 0.5rem; bottom: -18px; }
+            .topbar { font-size: 0.82rem; }
+            .bee-num { font-size: 4rem; }
+            .seccion-cabeza p { font-size: 1rem; }
+            .cta-caja { padding: 2.2rem 1.4rem; border-radius: 24px; }
+        }
+        @media (max-width: 560px) and (min-width: 400px) {
+            .accesos-grid { grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+            .acceso { padding: 1.2rem 1rem; }
+            .acceso h3 { font-size: 1.1rem; }
+            .acceso p { font-size: 0.88rem; }
+        }
+        @media (max-width: 360px) {
+            .brand span { font-size: 0.95rem; }
+            .brand img { width: 52px; height: 52px; }
+            .news-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <header class="news-hero">
-        <!-- Botón de Inicio añadido aquí -->
-        <a href="https://colegiotlahtoani.com/" class="home-button">
-            <i class="fas fa-home"></i> Inicio
-        </a>
+
+    <!-- Barra de aviso -->
+    <div class="topbar">
+        <i class="fas fa-spell-check"></i>¡Ya viene el Spelling Bee! Martes 8 de diciembre.
+        <a href="#spelling-bee">Prepárate aquí</a>
+    </div>
+
+    <!-- Encabezado y menú -->
+    <header class="header">
         <div class="container">
-            <img src="logo-colegio-tlahtoani.png" alt="Logo Colegio Tlahtoani" class="news-logo">
-            <h1 class="news-title">Noticias Educativas</h1>
-            <p class="news-subtitle">Mantente informado sobre las últimas novedades y eventos del Colegio Tlahtoani</p>
+            <a href="https://colegiotlahtoani.com/" class="brand" aria-label="Colegio Tlahtoani, ir al sitio principal">
+                <img src="logo-tlahtoani.png" alt="Logo Colegio Tlahtoani">
+                <span>Colegio Tlahtoani<small>NOTICIAS Y AVISOS</small></span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="nav" id="menu" aria-label="Menú principal">
+                <a class="link" href="#noticias" data-filtro="todas">Noticias</a>
+                <a class="link" href="#noticias" data-filtro="Eventos">Eventos</a>
+                <a class="link" href="#noticias" data-filtro="Servicios">Menús</a>
+                <a class="link" href="#spelling-bee">Spelling Bee</a>
+                <!-- Botón que lleva a la web principal del colegio -->
+                <a class="btn btn-primario" href="https://colegiotlahtoani.com/"><i class="fas fa-home"></i> Sitio del colegio</a>
+            </nav>
         </div>
     </header>
-    
+
     <main>
-        <section class="container">
-            <div class="news-grid">
-                <!-- Nueva noticia: Instrucciones Festival Rio 2025 -->
-                <article class="news-card fade-in">
-                    <div class="news-header">
-                        <img src="rio.jpg" alt="Instrucciones Festival Rio 2025">
+        <!-- Portada -->
+        <section class="hero" id="inicio">
+            <div class="container">
+                <div>
+                    <span class="etiqueta">Noticias educativas</span>
+                    <h1>Todo lo que pasa en el <em>Colegio Tlahtoani</em>, en un solo lugar</h1>
+                    <p class="lead">Avisos importantes, eventos, menú escolar y logros de nuestros alumnos, siempre actualizados y al alcance de tu celular.</p>
+                    <div class="hero-botones">
+                        <a class="btn btn-primario" href="#noticias" data-filtro="todas">Ver noticias <i class="fas fa-arrow-down"></i></a>
+                        <a class="btn btn-borde" href="https://colegiotlahtoani.com/"><i class="fas fa-home"></i> Ir al sitio del colegio</a>
                     </div>
-                    <div class="news-body">
-                        <span class="news-category" style="background-color: var(--rojo);">Urgente</span>
-                        <h3 class="news-card-title">📢 INSTRUCCIONES PARA ACCEDER AL FESTIVAL "RIO" 2025</h3>
-                        <p class="news-excerpt">🔹 Consulta todos los pasos para ingresar al evento. ¡Prepárate con tiempo!<br><br>⚠️ Recuerda:<br>✅ Boleto digital obligatorio.<br>✅ Horarios y zonas asignadas.<br>✅ Protocolo estricto.</p>
-                        <a href="https://colegiotlahtoani.github.io/-Instrucciones-para-Ingresar-al-Festival-/" target="_blank" class="read-more" style="color: var(--rojo);">Ver instrucciones <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div>
+                    <div class="hero-cards">
+                        <div class="hero-card comunidad">
+                            <span class="nuevo">Nuestra comunidad</span>
+                            <img class="foto" src="web.jpeg" alt="Alumnos del Colegio Tlahtoani sonriendo juntos en el patio">
+                        </div>
+                        <div class="hero-card spelling">
+                            <img class="foto" src="spellingbee.jpeg" alt="Alumno participando con micrófono en un evento académico">
+                            <a class="pill" href="#spelling-bee"><i class="fas fa-spell-check"></i> Spelling Bee<br>8 de diciembre</a>
+                        </div>
                     </div>
-                </article>
+                </div>
+            </div>
+            <div class="ola" aria-hidden="true">
+                <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 50 C 240 100 480 0 760 40 S 1240 100 1440 30 L1440 90 L0 90 Z" fill="#FBF8F1"/></svg>
+            </div>
+        </section>
 
-                <!-- Noticia Festival Escolar -->
-                <article class="news-card fade-in">
-                    <div class="news-header">
-                        <img src="rio.jpg" alt="Festival escolar">
-                    </div>
-                    <div class="news-body">
-                        <span class="news-category">Eventos</span>
-                        <h3 class="news-card-title">🎉 ¡Invitación al Festival Escolar!</h3>
-                        <p class="news-excerpt">Únete a nuestro evento lleno de actividades culturales y muestras artísticas.</p>
-                        <a href="https://goo.su/P5ius8" target="_blank" class="read-more">📌 Consulta aquí <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
+        <!-- Accesos rápidos -->
+        <section class="accesos">
+            <div class="container accesos-grid">
+                <a class="acceso reveal" href="#noticias" data-filtro="Urgente">
+                    <span class="ico"><i class="fas fa-bullhorn"></i></span>
+                    <h3>Avisos urgentes</h3>
+                    <p>Comunicados que necesitas leer hoy.</p>
+                    <span class="mas">Ver avisos <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a class="acceso reveal" href="#noticias" data-filtro="Eventos">
+                    <span class="ico"><i class="fas fa-calendar-days"></i></span>
+                    <h3>Eventos</h3>
+                    <p>Festivales, invitaciones e instrucciones de acceso.</p>
+                    <span class="mas">Ver eventos <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a class="acceso reveal" href="#noticias" data-filtro="Servicios">
+                    <span class="ico"><i class="fas fa-utensils"></i></span>
+                    <h3>Menús escolares</h3>
+                    <p>La alimentación de la semana: primaria y kínder.</p>
+                    <span class="mas">Ver menús <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a class="acceso reveal" href="#spelling-bee">
+                    <span class="ico"><i class="fas fa-spell-check"></i></span>
+                    <h3>Spelling Bee</h3>
+                    <p>Martes 8 de diciembre. ¡A prepararse!</p>
+                    <span class="mas">Ver detalles <i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </section>
 
-                <!-- Noticia del menú escolar -->
-                <article class="news-card fade-in">
-                    <div class="news-header">
-                        <img src="menu-escolar.jpg" alt="Menú escolar semanal">
+        <!-- Spelling Bee -->
+        <section class="bee" id="spelling-bee">
+            <div class="container">
+                <div class="bee-caja reveal">
+                    <div class="bee-info">
+                        <span class="etiqueta">Próximo evento</span>
+                        <h2>¡Ya viene el Spelling Bee!</h2>
+                        <p class="bee-fecha"><i class="fas fa-calendar-check"></i>Martes 8 de diciembre</p>
+                        <p>Es momento de prepararse. Estudia las palabras y practica deletrearlas en voz alta.</p>
+                        <ul class="bee-tips">
+                            <li><i class="fas fa-check"></i>Estudia la lista de palabras del Spelling Bee.</li>
+                            <li><i class="fas fa-check"></i>Practica deletrear en voz alta.</li>
+                            <li><i class="fas fa-check"></i>Repasa un poco cada día con tu familia.</li>
+                        </ul>
                     </div>
-                    <div class="news-body">
-                        <span class="news-category">Servicios</span>
-                        <h3 class="news-card-title">📅 Menú Escolar de esta semana</h3>
-                        <p class="news-excerpt">Conoce las opciones de alimentación para nuestros estudiantes.</p>
-                        <a href="https://colegiotlahtoani.github.io/men-/" target="_blank" class="read-more">📌 Consulta aquí <i class="fas fa-arrow-right"></i></a>
+                    <div class="bee-cuenta" aria-live="polite">
+                        <span class="bee-num" id="beeDias">--</span>
+                        <span class="bee-label" id="beeLabel">días para el Spelling Bee</span>
                     </div>
-                </article>
+                </div>
+            </div>
+        </section>
 
-                <!-- Noticia original -->
-                <article class="news-card fade-in">
-                    <div class="news-header">
-                        <img src="noticia1.jpg" alt="Estudiantes en competencia académica">
-                    </div>
-                    <div class="news-body">
-                        <span class="news-category">Eventos</span>
-                        <h3 class="news-card-title">Triunfo en el AMCO Summit 2025</h3>
-                        <p class="news-excerpt">Nuestros estudiantes destacaron en el prestigioso evento académico internacional.</p>
-                        <a href="https://colegiotlahtoani.github.io/amcosummit/" target="_blank" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
+        <!-- Noticias -->
+        <section class="seccion" id="noticias">
+            <div class="container">
+                <div class="seccion-cabeza reveal">
+                    <span class="sobre">Últimas novedades</span>
+                    <h2>Noticias del colegio</h2>
+                    <p>Mantente informado sobre las novedades y eventos del Colegio Tlahtoani.</p>
+                </div>
+
+                <div class="filtros reveal" role="group" aria-label="Filtrar noticias">
+                    <button class="filtro activo" data-filtro="todas">Todas</button>
+                    <button class="filtro" data-filtro="Urgente">Urgente</button>
+                    <button class="filtro" data-filtro="Eventos">Eventos</button>
+                    <button class="filtro" data-filtro="Servicios">Servicios</button>
+                </div>
+
+                <div class="news-grid" id="newsGrid">
+                    <!-- Noticia: Spelling Bee -->
+                    <article class="news-card reveal" data-cat="Eventos">
+                        <div class="news-header icono sol"><i class="fas fa-spell-check"></i></div>
+                        <div class="news-body">
+                            <span class="news-category">Eventos</span>
+                            <h3 class="news-card-title">🐝 ¡Ya viene el Spelling Bee!</h3>
+                            <p class="news-excerpt">Martes 8 de diciembre. Estudia las palabras y prepárate para deletrear.</p>
+                            <a href="#spelling-bee" class="read-more">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Noticia: Festival Navideño 2026 -->
+                    <article class="news-card reveal" data-cat="Eventos">
+                        <div class="news-header icono rojo"><i class="fas fa-tree"></i></div>
+                        <div class="news-body">
+                            <span class="news-category">Eventos</span>
+                            <h3 class="news-card-title">🎄 Festival Navideño Tlahtoani 2026</h3>
+                            <p class="news-excerpt">Consulta toda la información del festival navideño del colegio.</p>
+                            <a href="https://colegiotlahtoani.github.io/festival-navideno-tlahtoani-2026/" target="_blank" rel="noopener" class="read-more">Ver información <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Noticia: Menú escolar -->
+                    <article class="news-card reveal" data-cat="Servicios">
+                        <div class="news-header">
+                            <img src="menu-escolar.jpg" alt="Menú escolar semanal" loading="lazy" decoding="async">
+                        </div>
+                        <div class="news-body">
+                            <span class="news-category servicios">Servicios</span>
+                            <h3 class="news-card-title">📅 Menú escolar de primaria</h3>
+                            <p class="news-excerpt">Conoce las opciones de alimentación para nuestros estudiantes.</p>
+                            <a href="https://colegiotlahtoani.github.io/men-/" target="_blank" rel="noopener" class="read-more">📌 Consulta aquí <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Noticia: Menú de kínder -->
+                    <article class="news-card reveal" data-cat="Servicios">
+                        <div class="news-header icono verde"><i class="fas fa-apple-whole"></i></div>
+                        <div class="news-body">
+                            <span class="news-category servicios">Servicios</span>
+                            <h3 class="news-card-title">🍎 Menú escolar de kínder</h3>
+                            <p class="news-excerpt">Conoce las opciones de alimentación para los alumnos de kínder.</p>
+                            <a href="https://colegiotlahtoani.github.io/MEN-KINDER/" target="_blank" rel="noopener" class="read-more">📌 Consulta aquí <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+                <p class="vacio" id="vacio" hidden>No hay noticias en esta categoría por ahora.</p>
+            </div>
+        </section>
+
+        <!-- Beneficios -->
+        <section class="banda seccion" style="padding: 3.5rem 0;">
+            <div class="container banda-grid">
+                <div class="beneficio reveal">
+                    <span class="ico"><i class="fas fa-qrcode"></i></span>
+                    <div><h3>Acceso con boleto digital</h3><p>Entra a los eventos con tu código QR, sin filas ni boletos impresos.</p></div>
+                </div>
+                <div class="beneficio reveal">
+                    <span class="ico"><i class="fas fa-mobile-screen-button"></i></span>
+                    <div><h3>Información en tu celular</h3><p>Avisos, invitaciones y menú siempre a un toque de distancia.</p></div>
+                </div>
+                <div class="beneficio reveal">
+                    <span class="ico"><i class="fas fa-bolt"></i></span>
+                    <div><h3>Siempre al día</h3><p>Publicamos las novedades en cuanto suceden, para que no te pierdas nada.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Llamado a la acción -->
+        <section class="cta">
+            <div class="container">
+                <div class="cta-caja reveal">
+                    <h2>Conoce más del Colegio Tlahtoani</h2>
+                    <p>Visita nuestro sitio principal para conocer nuestra propuesta educativa, información de contacto y más.</p>
+                    <a class="btn btn-primario" href="https://colegiotlahtoani.com/"><i class="fas fa-home"></i> Ir al sitio del colegio</a>
+                </div>
             </div>
         </section>
     </main>
 
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="https://colegiotlahtoani.com/" class="brand">
+                        <span class="logo-bg"><img src="logo-tlahtoani.png" alt="Logo Colegio Tlahtoani"></span>
+                        <span>Colegio Tlahtoani<small>GUADALAJARA, JALISCO</small></span>
+                    </a>
+                    <p class="desc">Noticias, avisos y eventos para toda la comunidad escolar.</p>
+                </div>
+                <div>
+                    <h4>Explorar</h4>
+                    <ul>
+                        <li><a href="https://colegiotlahtoani.com/">Sitio del colegio</a></li>
+                        <li><a href="#noticias">Noticias</a></li>
+                        <li><a href="https://colegiotlahtoani.github.io/men-/" target="_blank" rel="noopener">Menú de primaria</a></li>
+                        <li><a href="https://colegiotlahtoani.github.io/MEN-KINDER/" target="_blank" rel="noopener">Menú de kínder</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Eventos</h4>
+                    <ul>
+                        <li><a href="https://colegiotlahtoani.github.io/festival-navideno-tlahtoani-2026/" target="_blank" rel="noopener">Festival Navideño 2026</a></li>
+                        <li><a href="#spelling-bee">Spelling Bee</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bajo">© 2026 Colegio Tlahtoani GDL. Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
     <script>
-        // Animación de aparición al hacer scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const fadeObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        fadeElements.forEach(el => {
-            el.style.opacity = 0;
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            fadeObserver.observe(el);
+        // Menú móvil
+        const toggle = document.getElementById('menuToggle');
+        const menu = document.getElementById('menu');
+        toggle.addEventListener('click', () => {
+            const abierto = menu.classList.toggle('abierto');
+            toggle.setAttribute('aria-expanded', abierto);
         });
+
+        // Filtro de noticias
+        const tarjetas = document.querySelectorAll('.news-card');
+        const botones = document.querySelectorAll('.filtro');
+        const vacio = document.getElementById('vacio');
+
+        function filtrar(cat) {
+            let visibles = 0;
+            tarjetas.forEach(t => {
+                const mostrar = cat === 'todas' || t.dataset.cat === cat;
+                t.hidden = !mostrar;
+                if (mostrar) { visibles++; t.classList.add('visible'); }
+            });
+            botones.forEach(b => b.classList.toggle('activo', b.dataset.filtro === cat));
+            vacio.hidden = visibles > 0;
+        }
+
+        // Cualquier enlace o botón con data-filtro aplica el filtro
+        document.querySelectorAll('[data-filtro]').forEach(el => {
+            el.addEventListener('click', () => {
+                filtrar(el.dataset.filtro);
+                menu.classList.remove('abierto');
+                toggle.setAttribute('aria-expanded', false);
+            });
+        });
+
+        // Cuenta regresiva del Spelling Bee (martes 8 de diciembre de 2026)
+        (function () {
+            const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+            const dias = Math.round((new Date(2026, 11, 8) - hoy) / 86400000);
+            const num = document.getElementById('beeDias');
+            const label = document.getElementById('beeLabel');
+            if (dias > 1) { num.textContent = dias; label.textContent = 'días para el Spelling Bee'; }
+            else if (dias === 1) { num.textContent = '1'; label.textContent = 'día: ¡es mañana!'; }
+            else if (dias === 0) { num.textContent = '¡Hoy!'; label.textContent = 'es el Spelling Bee'; }
+            else { num.textContent = '🐝'; label.textContent = 'El Spelling Bee ya se realizó'; }
+        })();
+
+        // Animación de aparición al hacer scroll
+        const items = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            const obs = new IntersectionObserver((entradas) => {
+                entradas.forEach(e => {
+                    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+                });
+            }, { threshold: 0.1 });
+            items.forEach(el => obs.observe(el));
+        } else {
+            items.forEach(el => el.classList.add('visible'));
+        }
     </script>
 </body>
 </html>
